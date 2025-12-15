@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container py-5">
+
+    <h2 class="mb-4">Checkout</h2>
+
+    <form method="POST" action="{% url 'checkout' %}">
+        {% csrf_token %}
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4>Shipping Details</h4>
+
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Phone</label>
+                    <input type="text" name="phone" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Address</label>
+                    <textarea name="address" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <!-- Added Static Payment Type -->
+                <div class="mb-3">
+                    <label>Payment Type</label>
+                    <input type="text" class="form-control" value="Cash on Delivery" readonly>
+                    <!-- Hidden input to submit COD to backend -->
+                    <input type="hidden" name="payment_type" value="Cash on Delivery">
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <h4>Order Summary</h4>
+
+                <ul class="list-group mb-3">
+                    {% for item in items %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>{{ item.name }} (x{{ item.quantity }})</div>
+                            <div>₹{{ item.subtotal }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h4>Total: ₹{{ total }}</h4>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-4">Place Order</button>
+    </form>
+
+</div>
+{% endblock body %}

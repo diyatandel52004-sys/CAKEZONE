@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<body>
+
+    <!-- Register Start -->
+    <div class="container-fluid contact position-relative px-5" style="margin-top: 90px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+
+                    <div class="bg-primary border-inner text-center text-white p-5 mb-4">
+                        <i class="fa fa-user-plus fs-1 text-white mb-3"></i>
+                        <h4 class="text-uppercase">Create Account</h4>
+                        <p>Please fill the form to register</p>
+                    </div>
+
+                    <form action="/register/" method ="POST">
+                        {% csrf_token %}
+                        <div class="row g-3">
+
+                            <!-- First Name -->
+                            <div class="col-sm-12">
+                                <input type="text" name="fname" class="form-control bg-light border-0 px-4"
+                                    placeholder="First Name" required style="height: 55px;">
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="col-sm-12">
+                                <input type="text" name="lname" class="form-control bg-light border-0 px-4"
+                                    placeholder="Last Name" required style="height: 55px;">
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-sm-12">
+                                <input type="email" name="email" class="form-control bg-light border-0 px-4"
+                                    placeholder="Email" required style="height: 55px;">
+                            </div>
+
+                            <!-- Username -->
+                            <div class="col-sm-12">
+                                <input type="text" name="uname" class="form-control bg-light border-0 px-4"
+                                    placeholder="Username" required style="height: 55px;">
+                            </div>
+
+                            <!-- Password -->
+                            <div class="col-sm-12">
+                                <input type="password" name="pass1" class="form-control bg-light border-0 px-4"
+                                    placeholder="Password" required style="height: 55px;">
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="col-sm-12">
+                                <input type="password" name="pass2" class="form-control bg-light border-0 px-4"
+                                    placeholder="Confirm Password" required style="height: 55px;">
+                            </div>
+
+                            {% if messages %}
+                            <div class="col-sm-12">
+                                {% for message in messages %}
+                                <div class="alert alert-danger py-2">{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <!-- Submit Button -->
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary border-inner w-100 py-3" type="submit">
+                                    Register
+                                </button>
+                            </div>
+
+                            <div class="col-sm-12 text-center mt-3">
+                                <p class="m-0 text-muted">Already have an account?
+                                    <a href="/login/" class="text-primary">Login</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register End -->
+
+</body>
+</html>
+
+{% endblock body %}

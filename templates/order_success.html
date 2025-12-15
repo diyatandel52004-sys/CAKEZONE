@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="container text-center success-page-container">
+
+    <!-- Success Animation -->
+    <div class="success-checkmark">
+        <div class="check-icon"></div>
+    </div>
+
+    <h1 class="text-success mt-4">🎉 Thank You for Your Order!</h1>
+    <p class="mt-2 fs-5 text-muted">Your order has been placed successfully.</p>
+
+    <!-- Order ID -->
+    {% if order_id %}
+        <h5 class="mt-3">
+            Order ID: <strong>#{{ order_id }}</strong>
+        </h5>
+    {% else %}
+        <h5 class="mt-3 text-danger">
+            Order ID not available
+        </h5>
+    {% endif %}
+
+    <!-- Delivery Estimate -->
+    <p class="text-muted">
+        Estimated Delivery: <strong>2–3 Business Days</strong>
+    </p>
+
+    <div class="mt-4">
+        <a href="{% url 'shop' %}" class="success-btn me-2">Continue Shopping</a>
+        <a href="{% url 'index' %}" class="success-btn">Go to Home</a>
+    </div>
+
+    <!-- Suggested Products -->
+    <h3 class="mt-5 mb-4">You May Also Like</h3>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-3">
+            <div class="suggest-card">
+                <img src="{% static 'img/cake-1.jpg' %}" alt="Chocolate Cake">
+                <h5 class="mt-3">Chocolate Cake</h5>
+                <p class="text-muted">₹1500</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="suggest-card">
+                <img src="{% static 'img/cake-2.jpg' %}" alt="Red Velvet Cake">
+                <h5 class="mt-3">Red Velvet Cake</h5>
+                <p class="text-muted">₹1800</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="suggest-card">
+                <img src="{% static 'img/cake-3.jpg' %}" alt="Fruit Delight Cake">
+                <h5 class="mt-3">Fruit Delight Cake</h5>
+                <p class="text-muted">₹1300</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

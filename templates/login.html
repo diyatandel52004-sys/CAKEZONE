@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<body>
+
+    <!-- Login Start -->
+    <div class="container-fluid contact position-relative px-5" style="margin-top: 90px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+
+                    <div class="bg-primary border-inner text-center text-white p-5 mb-4">
+                        <i class="fa fa-user-circle fs-1 text-white mb-3"></i>
+                        <h4 class="text-uppercase">Welcome Back</h4>
+                        <p>Please login to your account</p>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- ✅ Hidden next field -->
+                        <input type="hidden" name="next" value="{{ next }}">
+
+                        <div class="row g-3">
+                            <div class="col-sm-12">
+                                <input type="text" name="username" class="form-control bg-light border-0 px-4"
+                                    placeholder="Username" required style="height: 55px;">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <input type="password" name="password" class="form-control bg-light border-0 px-4"
+                                    placeholder="Password" required style="height: 55px;">
+                            </div>
+
+                            <!-- ✅ Show only login-related messages -->
+                            {% if messages %}
+                            <div class="col-sm-12">
+                                {% for message in messages %}
+                                    {% if "login" in message.tags %}
+                                        <div class="alert alert-danger py-2">{{ message }}</div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <!-- END LOGIN MESSAGES -->
+
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary border-inner w-100 py-3" type="submit">
+                                    Login
+                                </button>
+                            </div>
+
+                            <div class="col-sm-12 text-center mt-3">
+                                <p class="m-0 text-muted">Don't have an account? 
+                                    <a href="/register/" class="text-primary">Register</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login End -->
+
+</body>
+
+</html>
+
+{% endblock body %}

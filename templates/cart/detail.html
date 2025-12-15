@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container py-5">
+
+    <h2 class="mb-4">Your Cart</h2>
+
+    {% if items %}
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+
+                    <!-- Quantity controls -->
+                    <td>
+                        <a href="{% url 'decrease_quantity' item.product.id %}"
+                           class="btn btn-sm btn-outline-dark">−</a>
+
+                        <span class="mx-2">{{ item.quantity }}</span>
+
+                        <a href="{% url 'increase_quantity' item.product.id %}"
+                           class="btn btn-sm btn-outline-dark">+</a>
+                    </td>
+
+                    <td>₹{{ item.product.price }}</td>
+
+                    <!-- Correct subtotal -->
+                   <td>₹{{ item.subtotal }}</td>
+
+
+                    <td>
+                        <a href="{% url 'remove_from_cart' item.product.id %}"
+                           class="btn btn-sm btn-danger">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3 class="mt-4">Total: ₹{{ total }}</h3>
+
+        <div class="mt-4">
+            <a href="{% url 'clear_cart' %}" class="btn btn-warning me-2">
+                Clear Cart
+            </a>
+            <a href="{% url 'checkout' %}" class="btn btn-success">
+                Proceed to Checkout
+            </a>
+        </div>
+
+    {% else %}
+        <div class="alert alert-info">Your cart is empty.</div>
+    {% endif %}
+
+</div>
+{% endblock body %}
